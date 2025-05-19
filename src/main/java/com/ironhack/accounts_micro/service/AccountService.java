@@ -29,7 +29,7 @@ public class AccountService {
         Optional<Account> account = accountRepository.findById(id);
 
         if (account.isPresent()) {
-            UserDTO user = restTemplate.getForObject("http://localhost:8080/api/user/" + account.get().getOwnerId(), UserDTO.class);
+            UserDTO user = restTemplate.getForObject("http://users-micro/api/user/" + account.get().getOwnerId(), UserDTO.class);
 
             System.out.println("EL USUARIO ES: " + user);
 
