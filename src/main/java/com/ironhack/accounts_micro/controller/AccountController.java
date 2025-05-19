@@ -1,11 +1,14 @@
 package com.ironhack.accounts_micro.controller;
 
+import com.ironhack.accounts_micro.dto.AccountResponseDTO;
+import com.ironhack.accounts_micro.dto.UserDTO;
 import com.ironhack.accounts_micro.model.Account;
 import com.ironhack.accounts_micro.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,14 +26,8 @@ public class AccountController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public ResponseEntity<Account> getAccountById(@PathVariable Long id) {
-        Optional<Account> account = accountService.getAccountById(id);
-
-        if (account.isPresent()) {
-            return new ResponseEntity<>(account.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Cuenta no encontrada, devuelve 404 Not Found
-        }
+    public ResponseEntity<?> getAccountById(@PathVariable Long id) {
+       return accountService.getAccountById(id);
     }
 
     @PostMapping
